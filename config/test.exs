@@ -17,3 +17,7 @@ config :forks_the_egg_sample, ForksTheEggSample.Repo,
   database: "forks_the_egg_sample_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configures mailer for testing
+config :forks_the_egg_sample, ForksTheEggSample.Mailer,
+  adapter: Bamboo.TestAdapter

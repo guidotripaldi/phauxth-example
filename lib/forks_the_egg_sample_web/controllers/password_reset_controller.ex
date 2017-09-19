@@ -2,7 +2,7 @@ defmodule ForksTheEggSampleWeb.PasswordResetController do
   use ForksTheEggSampleWeb, :controller
 
   import ForksTheEggSampleWeb.Authorize
-  alias ForksTheEggSample.{Accounts, Message}
+  alias ForksTheEggSample.Accounts
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -10,7 +10,7 @@ defmodule ForksTheEggSampleWeb.PasswordResetController do
 
   def create(conn, %{"password_reset" => %{"email" => email}}) do
     key = Accounts.create_password_reset(ForksTheEggSampleWeb.Endpoint, %{"email" => email})
-    Message.reset_request(email, key)
+    Accounts.Message.reset_request(email, key)
     message = "Check your inbox for instructions on how to reset your password"
     success(conn, message, page_path(conn, :index))
   end
@@ -33,7 +33,7 @@ defmodule ForksTheEggSampleWeb.PasswordResetController do
   end
 
   defp update_password({:ok, user}, conn, _params) do
-    Message.reset_success(user.email)
+    Accounts.Message.reset_success(user.email)
     message = "Your password has been reset"
     configure_session(conn, drop: true)
     |> success(message, session_path(conn, :new))

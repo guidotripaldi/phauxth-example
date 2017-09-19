@@ -17,9 +17,15 @@ config :forks_the_egg_sample, ForksTheEggSampleWeb.Endpoint,
   pubsub: [name: ForksTheEggSample.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Configures Phauxth authentication
 config :phauxth,
   token_salt: "yX7/DDXv",
   endpoint: ForksTheEggSampleWeb.Endpoint
+
+# Configures mailer
+config :forks_the_egg_sample, ForksTheEggSample.Mailer,
+  adapter: Bamboo.MandrillAdapter,
+  api_key: System.get_env("MANDRILL_API_KEY")
 
 # Configures Elixir's Logger
 config :logger, :console,

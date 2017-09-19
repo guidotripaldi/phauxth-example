@@ -3,7 +3,7 @@ defmodule ForksTheEggSampleWeb.UserController do
 
   import ForksTheEggSampleWeb.Authorize
   alias Phauxth.Log
-  alias ForksTheEggSample.{Accounts, Message}
+  alias ForksTheEggSample.Accounts
 
   plug :user_check when action in [:index, :show]
   plug :id_check when action in [:edit, :update, :delete]
@@ -23,7 +23,7 @@ defmodule ForksTheEggSampleWeb.UserController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         Log.info(%Log{user: user.id, message: "user created"})
-        Message.confirm_request(email, key)
+        Accounts.Message.confirm_request(email, key)
         success(conn, "User created successfully", session_path(conn, :new))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

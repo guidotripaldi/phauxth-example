@@ -41,6 +41,7 @@ defmodule ForksTheEggSample.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phauxth, "~> 1.1"},
       {:argon2_elixir, "~> 1.2"},
+      {:bamboo, "~> 0.8"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"}
     ]
